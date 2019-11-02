@@ -1,13 +1,13 @@
 package com.dku.springstudy.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class MainController {
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
-        return "Hello world!!!";
+        return "index";
     }
 }
