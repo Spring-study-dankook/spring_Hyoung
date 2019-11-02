@@ -8,6 +8,7 @@ package com.dku.springstudy.controller;
 @Controller
 public class LoginController
 {
+    // user 조회
     @GetMapping("/user")
     public String user(Model model, User user)
     {
@@ -16,6 +17,7 @@ public class LoginController
         return "UserView";
     }
 
+    // Log in
     @PostMapping("/login")
     public String login (Model model, User user, LoginService loginService,
                          @RequestParam(value = "inputId" , required=false) String inputId ,

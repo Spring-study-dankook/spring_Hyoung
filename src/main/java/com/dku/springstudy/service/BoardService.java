@@ -1,7 +1,5 @@
 package com.dku.springstudy.service;
-
 import com.dku.springstudy.vo.AllBoards;
-import com.dku.springstudy.vo.User;
 
 public class BoardService {
 
@@ -11,12 +9,12 @@ public class BoardService {
             if(boards.boards[i].getTitle().equals(inputTitle))
                 return i;
         }
-        return 0;
+        return -1;
     }
 
-    public void ModifyContents (AllBoards boards, int board_id,
-                                String inputTitle, String inputContent) {
-        boards.boards[board_id - 1].setContent(inputContent);
+    // board_id에 해당하는 내용을 수정하는 service
+    public void ModifyContents (AllBoards boards, int board_id, String inputContent) {
+        boards.boards[board_id].setContent(inputContent);
     }
 }
 

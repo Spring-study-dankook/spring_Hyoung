@@ -1,19 +1,14 @@
+// 하나의 게시글에 대한 Class
+
 package com.dku.springstudy.vo;
 
 public class Board {
-    private int bid;
     private String title;
     private String content;
 
-
-    public Board(int bid, String title, String content) {
-        this.bid = bid;
+    public Board(String title, String content) {
         this.title = title;
         this.content = content;
-    }
-
-    public int getId() {
-        return bid;
     }
 
     public String getTitle() {
@@ -22,10 +17,6 @@ public class Board {
 
     public String getContent() {
         return content;
-    }
-
-    public void setId(int bid) {
-        this.bid = bid;
     }
 
     public void setTitle(String title) {

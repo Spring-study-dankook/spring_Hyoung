@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class BoardController {
 
+    // 모든 게시글 조회
     @GetMapping("/boards")
     public String Board(Model model, AllBoards boards) {
 
@@ -23,21 +24,23 @@ public class BoardController {
         return "BoardView/Board";
     }
 
+    // 입력받은 제목에 해당하는 제목, 내용 조회
     @GetMapping("/boards/getContents")
     public String GetContent (Model model, AllBoards boards, BoardService boardService,
                      @RequestParam(value = "title" , required=false) String title)
     {
         int board_id = boardService.IsTitleExisted(boards, title);
 
-        if(  board_id == 0 )
+        if(  board_id == -1 )
             return "BoardView/BoardNotExist";
 
-        model.addAttribute("title", boards.boards[board_id-1].getTitle());
-        model.addAttribute("content", boards.boards[board_id-1].getContent());
+        model.addAttribute("title", boards.boards[board_id].getTitle());
+        model.addAttribute("content", boards.boards[board_id].getContent());
 
         return "BoardView/CorrespondBoardView";
     }
 
+    // 입력받은 제목에 해당하는 내용 수정 후 제목, 내용 조회
     @PostMapping("/boards/modifyContents")
     public String ModifyContent (Model model, AllBoards boards, BoardService boardService,
                          @RequestParam(value = "title" , required=false) String title,
@@ -45,13 +48,13 @@ public class BoardController {
     {
         int board_id = boardService.IsTitleExisted(boards, title);
 
-        if( board_id == 0 )
+        if( board_id == -1 )
             return "BoardView/BoardNotExist";
 
-        boardService.ModifyContents(boards, board_id, title, content);
+        boardService.ModifyContents(boards, board_id, content);
 
-        model.addAttribute("title", boards.boards[board_id-1].getTitle());
-        model.addAttribute("content", boards.boards[board_id-1].getContent());
+        model.addAttribute("title", boards.boards[board_id].getTitle());
+        model.addAttribute("content", boards.boards[board_id].getContent());
 
         return "BoardView/CorrespondBoardView";
     }
