@@ -6,7 +6,7 @@
 </head>
 <body>
     <h2> 형준혁의 게시판 </h2>
-    <a href="http://localhost:8081/user"> Go to User page </a> <br/><br/>
-    <a href="http://localhost:8081/login"> Go to Login page </a>
+    <a href="http://localhost:8082/user"> Go to User page </a> <br/><br/>
+    <a href="http://localhost:8082/login"> Go to Login page </a>
 </body>
 </html>
