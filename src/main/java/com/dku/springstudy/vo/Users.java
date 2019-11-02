@@ -1,12 +1,10 @@
-package com.dku.springstudy.VO;
+package com.dku.springstudy.vo;
 
-import org.springframework.beans.factory.annotation.*;
-
-public class User {
+public class Users {
     private String UserId;
     private String UserPassword;
 
-    public User () {
+    public Users() {
         UserId="Hyoung";
         UserPassword="gudwnsgur";
     }
