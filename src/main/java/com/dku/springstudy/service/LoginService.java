@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class LoginService
 {
-
     public boolean isLoginSucceed (User user, String inputId, String inputPwd) {
         if (  user.getUser_Id().equals(inputId)  &&
                 user.getUser_Pwd().equals(inputPwd)  )
@@ -15,5 +14,4 @@ public class LoginService
         else
             return false;
     }
-
 }

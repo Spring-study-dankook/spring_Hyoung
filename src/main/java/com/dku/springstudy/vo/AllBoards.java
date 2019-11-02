@@ -3,18 +3,15 @@
 
 package com.dku.springstudy.vo;
 public class AllBoards {
-    private Board boards[];
+    public Board boards[];
 
     public AllBoards()
     {
-        boards[0] = new Board(1, "title_1",
-                                "content_1 ");
+        boards = new Board[3];
 
-        boards[1] = new Board(2, "title_2",
-                                "content_2");
-
-        boards[2] = new Board(3, "title_3",
-                                "content_3");
-
+        boards[0] = new Board(1, "JAVA", "WTF");
+        boards[1] = new Board(2, "KOTLIN", "TREND");
+        boards[2] = new Board(3, "JAVASCRIPT", "SO HARD");
     }
+
 }

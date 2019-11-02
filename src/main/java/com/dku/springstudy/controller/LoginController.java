@@ -17,7 +17,7 @@ public class LoginController
     }
 
     @PostMapping("/login")
-    public String Login (Model model, User user, LoginService loginService,
+    public String login (Model model, User user, LoginService loginService,
                          @RequestParam(value = "inputId" , required=false) String inputId ,
                          @RequestParam(value = "inputPwd" , required=false) String inputPwd )
     {
@@ -25,10 +25,8 @@ public class LoginController
         model.addAttribute("pwd", inputPwd);
 
         if( loginService.isLoginSucceed(user, inputId, inputPwd) )
-            return "LoginSucceededView";
+            return "LoginView/LoginSucceededView";
         else
-            return "LoginFailedView";
+            return "LoginView/LoginFailedView";
     }
 }
-
-
