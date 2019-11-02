@@ -7,29 +7,28 @@ package com.dku.springstudy.controller;
 @Controller
 public class LoginController
 {
-    User testUser = new User();
 
     @GetMapping("/user")
-    public String user(Model model)
+    public String user(Model model, User user)
     {
-        model.addAttribute("id", testUser.getUser_Id());
-        model.addAttribute("pwd", testUser.getUser_Pwd());
+        model.addAttribute("id", user.getUser_Id());
+        model.addAttribute("pwd", user.getUser_Pwd());
         return "CheckUserView";
     }
 
     @PostMapping("/login")
-    public String Login (Model model,
+    public String Login (Model model, User user,
                          @RequestParam(value = "inputId" , required=false) String inputId ,
                          @RequestParam(value = "inputPwd" , required=false) String inputPwd )
     {
         model.addAttribute("id", inputId);
         model.addAttribute("pwd", inputPwd);
 
-        if (  testUser.getUser_Id().equals(inputId)  &&
-                testUser.getUser_Pwd().equals(inputPwd)  )
+        if (  user.getUser_Id().equals(inputId)  &&
+                user.getUser_Pwd().equals(inputPwd)  )
             return "LoginView";
         else
-            return "LoignView";
+            return "LoginView";
     }
 }
 
