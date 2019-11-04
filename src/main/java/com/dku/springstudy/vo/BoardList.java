@@ -3,10 +3,10 @@
 */
 
 package com.dku.springstudy.vo;
-public class AllBoards {
+public class BoardList {
     public Board boards[];
 
-    public AllBoards()
+    public BoardList()
     {
         boards = new Board[3];
 

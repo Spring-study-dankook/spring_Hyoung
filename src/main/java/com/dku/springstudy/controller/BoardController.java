@@ -1,6 +1,6 @@
 package com.dku.springstudy.controller;
 import com.dku.springstudy.service.BoardService;
-import com.dku.springstudy.vo.AllBoards;
+import com.dku.springstudy.vo.BoardList;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ public class BoardController {
 
     // 모든 게시글 조회
     @GetMapping("/boards")
-    public String Board(Model model, AllBoards boards) {
+    public String Board(Model model, BoardList boards) {
 
         model.addAttribute("title_1", boards.boards[0].getTitle());
         model.addAttribute("content_1", boards.boards[0].getContent());
@@ -26,35 +26,35 @@ public class BoardController {
 
     // 입력받은 제목에 해당하는 제목, 내용 조회
     @GetMapping("/boards/getContents")
-    public String GetContent (Model model, AllBoards boards, BoardService boardService,
-                     @RequestParam(value = "title" , required=false) String title)
+    public String GetContent (Model model, BoardList boardList, BoardService boardService,
+                              @RequestParam(value = "title" , required=false) String title)
     {
-        int board_id = boardService.IsTitleExisted(boards, title);
+        int board_id = boardService.IsTitleExisted(boardList, title);
 
         if(  board_id == -1 )
             return "BoardView/BoardNotExist";
 
-        model.addAttribute("title", boards.boards[board_id].getTitle());
-        model.addAttribute("content", boards.boards[board_id].getContent());
+        model.addAttribute("title", boardList.boards[board_id].getTitle());
+        model.addAttribute("content", boardList.boards[board_id].getContent());
 
         return "BoardView/CorrespondBoardView";
     }
 
     // 입력받은 제목에 해당하는 내용 수정 후 제목, 내용 조회
     @PostMapping("/boards/modifyContents")
-    public String ModifyContent (Model model, AllBoards boards, BoardService boardService,
-                         @RequestParam(value = "title" , required=false) String title,
-                         @RequestParam(value = "content" , required=false) String content )
+    public String ModifyContent (Model model, BoardList boardList, BoardService boardService,
+                                 @RequestParam(value = "title" , required=false) String title,
+                                 @RequestParam(value = "content" , required=false) String content )
     {
-        int board_id = boardService.IsTitleExisted(boards, title);
+        int board_id = boardService.IsTitleExisted(boardList, title);
 
         if( board_id == -1 )
             return "BoardView/BoardNotExist";
 
-        boardService.ModifyContents(boards, board_id, content);
+        boardService.ModifyContents(boardList, board_id, content);
 
-        model.addAttribute("title", boards.boards[board_id].getTitle());
-        model.addAttribute("content", boards.boards[board_id].getContent());
+        model.addAttribute("title", boardList.boards[board_id].getTitle());
+        model.addAttribute("content", boardList.boards[board_id].getContent());
 
         return "BoardView/CorrespondBoardView";
     }
