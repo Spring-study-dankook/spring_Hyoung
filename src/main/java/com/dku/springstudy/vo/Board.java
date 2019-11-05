@@ -1,5 +1,3 @@
-// 하나의 게시글에 대한 Class
-
 package com.dku.springstudy.vo;
 
 public class Board {

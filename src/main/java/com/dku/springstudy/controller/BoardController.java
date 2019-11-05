@@ -1,60 +1,65 @@
 package com.dku.springstudy.controller;
+
 import com.dku.springstudy.service.BoardService;
+import com.dku.springstudy.vo.Board;
 import com.dku.springstudy.vo.BoardList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Objects;
 
 @Controller
 public class BoardController {
 
-    // 모든 게시글 조회
+    @Autowired
+    BoardService boardService;
+
     @GetMapping("/boards")
-    public String Board(Model model, BoardList boards) {
+    public String getBoards(Model model) {
 
-        model.addAttribute("title_1", boards.boards[0].getTitle());
-        model.addAttribute("content_1", boards.boards[0].getContent());
+        model.addAttribute("boards", BoardList.boards);
 
-        model.addAttribute("title_2", boards.boards[1].getTitle());
-        model.addAttribute("content_2", boards.boards[1].getContent());
+        /*model.addAttribute("title_1", BoardList.boards.get(0).getTitle());
+        model.addAttribute("content_1", BoardList.boards.get(0).getContent());
 
-        model.addAttribute("title_3", boards.boards[2].getTitle());
-        model.addAttribute("content_3", boards.boards[2].getContent());
+        model.addAttribute("title_2", BoardList.boards.get(1).getTitle());
+        model.addAttribute("content_2", BoardList.boards.get(1).getContent());
 
-        return "BoardView/Board";
+        model.addAttribute("title_3", BoardList.boards.get(2).getTitle());
+        model.addAttribute("content_3", BoardList.boards.get(2).getContent());*/
+
+        return "board";
     }
 
-    // 입력받은 제목에 해당하는 제목, 내용 조회
     @GetMapping("/boards/getContents")
-    public String GetContent (Model model, BoardList boardList, BoardService boardService,
-                              @RequestParam(value = "title" , required=false) String title)
-    {
-        int board_id = boardService.IsTitleExisted(boardList, title);
+    public String getContent(Model model, @RequestParam(required = false) String title) {
+        Board board = boardService.findBoardByTitle(title);
 
-        if(  board_id == -1 )
+        if (Objects.isNull(board)) {
             return "BoardView/BoardNotExist";
+        }
 
-        model.addAttribute("title", boardList.boards[board_id].getTitle());
-        model.addAttribute("content", boardList.boards[board_id].getContent());
+        model.addAttribute("title", board.getTitle());
+        model.addAttribute("content", board.getContent());
 
         return "BoardView/CorrespondBoardView";
     }
 
-    // 입력받은 제목에 해당하는 내용 수정 후 제목, 내용 조회
     @PostMapping("/boards/modifyContents")
-    public String ModifyContent (Model model, BoardList boardList, BoardService boardService,
-                                 @RequestParam(value = "title" , required=false) String title,
-                                 @RequestParam(value = "content" , required=false) String content )
-    {
-        int board_id = boardService.IsTitleExisted(boardList, title);
+    public String modifyContent(Model model, Board board) {
+        Board targetBoard = boardService.findBoardByTitle(board.getTitle());
 
-        if( board_id == -1 )
+        if (targetBoard == null)
             return "BoardView/BoardNotExist";
 
-        boardService.ModifyContents(boardList, board_id, content);
+        boardService.modifyContents(board);
 
-        model.addAttribute("title", boardList.boards[board_id].getTitle());
-        model.addAttribute("content", boardList.boards[board_id].getContent());
+        model.addAttribute("title", targetBoard.getTitle());
+        model.addAttribute("content", targetBoard.getContent());
 
         return "BoardView/CorrespondBoardView";
     }
