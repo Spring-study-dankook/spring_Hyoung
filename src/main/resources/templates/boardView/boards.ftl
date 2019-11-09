@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1> 게시판 </h1>
-<h1>${boards?size}</h1>
+<h2> 게시글 개수 : ${boards?size}</h2>
 <#list boards as board>
-    <h3> 1. ${board.title}  </h3> <h5> content: ${board.content} </h5>
+    <h3> ${board.title}  </h3> <h5> content: ${board.content} </h5>
 </#list>
 </body>
 </html>
