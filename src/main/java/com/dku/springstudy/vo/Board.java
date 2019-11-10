@@ -3,12 +3,25 @@
 package com.dku.springstudy.vo;
 
 public class Board {
+
+    private BoardType type;
     private String title;
     private String content;
 
-    public Board(String title, String content) {
+
+    public Board(BoardType type, String title, String content) {
+        this.type = type;
         this.title = title;
         this.content = content;
+    }
+
+
+    public BoardType getType() {
+        return type;
+    }
+
+    public void setType(BoardType type) {
+        this.type = type;
     }
 
     public String getTitle() {

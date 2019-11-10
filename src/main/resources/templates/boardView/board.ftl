@@ -6,8 +6,8 @@
     </head>
     <body>
         <h1> 게시판 </h1>
+        <h3> [ ${board.type} ]  ${board.title}  </h3>
+        <h5> contents : ${board.content} </h5>
 
-        <h3> Searched Title :  ${title}  </h3>
-        <h5> content: ${content} </h5>
     </body>
 </html>
