@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<guava.version>28.0-jre</guava.version>
+		<guava.version>29.0-jre</guava.version>
 		<orgFreemarker.version>2.3.28</orgFreemarker.version>
 		<freemarker.version>2.1.9.RELEASE</freemarker.version>
 	</properties>
